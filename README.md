@@ -1,4 +1,4 @@
 javers-demo
 ===========
 
-This demo app shows how to use javers in business aplication
+This demo App shows how to use JaVers in business aplication

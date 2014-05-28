@@ -1,0 +1,1 @@
+java -jar build/libs/javers-democlient-0.1.0.jar
