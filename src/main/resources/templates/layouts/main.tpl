@@ -13,6 +13,12 @@ body {
                     }
 
                     div (class:"btn-group", style:'margin-left:20px') {
+                        a (class:"btn dropdown-toggle", 'data-toggle':'dropdown', href:'/') {
+                            span('Home')
+                        }
+                    }
+
+                    div (class:"btn-group", style:'margin-left:20px') {
                         a (class:"btn dropdown-toggle", 'data-toggle':'dropdown', href:'#') {
                             span('Features')
                             span(class:'caret')
@@ -20,6 +26,10 @@ body {
                         ul (class: 'dropdown-menu') {
                             li{
                                 a(href:'/object-diff', "object diff")
+                            }
+                            li (class: 'divider', role: 'presentation')
+                            li{
+                                a(href:'/auditing', "data auditing")
                             }
                         }
                     }

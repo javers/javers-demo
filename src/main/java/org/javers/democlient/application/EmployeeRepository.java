@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author bartosz walacik
  */
 //@RepositoryRestResource(collectionResourceRel = "employee", path = "employee")
-public interface EmployeeRepository extends MongoRepository<Employee, String> {
+public interface EmployeeRepository {//extends MongoRepository<Employee, String> {
     public Employee findByLastName(String lastName);
 }

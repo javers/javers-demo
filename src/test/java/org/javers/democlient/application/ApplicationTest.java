@@ -3,6 +3,7 @@ package org.javers.democlient.application;
 
 import org.javers.democlient.controller.HomeController;
 import org.javers.democlient.domain.Employee;
+import org.javers.democlient.domain.Hierarchy;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,14 +21,25 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class ApplicationTest  {
     private static final Logger logger = LoggerFactory.getLogger(ApplicationTest.class);
 
-    @Autowired EmployeeRepository employeeRepository;
+    @Autowired HierarchyRepository hierarchyRepository;
 
     @Test
     public void shouldInitKazik() {
-        Employee employee = employeeRepository.findOne("kaz");
+        Hierarchy hierarchy = hierarchyRepository.getByName("Hier_2014");
+        Hierarchy hierarchyOld = hierarchyRepository.getByName("Hier_2013");
 
-        Assert.assertEquals("Mad",employee.getLastName());
-        Assert.assertNotNull(employeeRepository);
+        System.out.println("Hier_2013 :");
+        System.out.println(hierarchyOld.print());
+
+        System.out.println("Hier_2014 :");
+        System.out.println(hierarchy.print());
+
+        Employee bob = hierarchy.getRoot();
+
+        Assert.assertEquals("Bob",bob.getLastName());
+        Employee kaz = bob.getSubordinate("kaz").get();
+        Assert.assertEquals("Kaz", kaz.getLastName());
+        Assert.assertEquals(bob, kaz.getBoss());
 
     }
 }
