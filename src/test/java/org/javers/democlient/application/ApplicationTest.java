@@ -1,7 +1,6 @@
 package org.javers.democlient.application;
 
 
-import org.javers.democlient.controller.HomeController;
 import org.javers.democlient.domain.Employee;
 import org.javers.democlient.domain.Hierarchy;
 import org.junit.Assert;
@@ -36,8 +35,8 @@ public class ApplicationTest  {
 
         Employee bob = hierarchy.getRoot();
 
-        Assert.assertEquals("Bob",bob.getLastName());
-        Employee kaz = bob.getSubordinate("kaz").get();
+        Assert.assertEquals("Bob", bob.getLastName());
+        Employee kaz = bob.getSubordinate("kaz");
         Assert.assertEquals("Kaz", kaz.getLastName());
         Assert.assertEquals(bob, kaz.getBoss());
 

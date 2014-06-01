@@ -14,5 +14,15 @@ class HomeController {
     def home() {
         new ModelAndView("views/home",[bootVersion: Banner.package.implementationVersion, groovyVersion: GroovySystem.version])
     }
+
+    @RequestMapping("/object-diff")
+    String diff(){
+        "views/object-diff"
+    }
+
+    @RequestMapping("/auditing")
+    String auditing(){
+        "views/auditing"
+    }
 }
 

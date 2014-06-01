@@ -9,7 +9,7 @@ body {
             div(class: 'navbar') {
                 div(class: 'navbar-inner') {
                     a(class: 'brand, col-lg-4, col-lg-8', href: 'http://javers.org'){
-                        img(src: 'img/javers_big.png', width:'200')
+                        img(src: '/img/javers_big.png', width:'200')
                     }
 
                     div (class:"btn-group", style:'margin-left:20px') {
@@ -25,11 +25,11 @@ body {
                         }
                         ul (class: 'dropdown-menu') {
                             li{
-                                a(href:'/object-diff', "object diff")
+                                a(href:'/object-diff', "Object diff")
                             }
                             li (class: 'divider', role: 'presentation')
                             li{
-                                a(href:'/auditing', "data auditing")
+                                a(href:'/auditing', "Data auditing")
                             }
                         }
                     }

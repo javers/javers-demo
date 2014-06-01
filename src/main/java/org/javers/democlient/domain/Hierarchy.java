@@ -23,6 +23,10 @@ public class Hierarchy {
         return root;
     }
 
+    public String getHierarchyName() {
+        return hierarchyName;
+    }
+
     public String print(){
         StringBuilder b = new StringBuilder();
         printTree(root, 1, b);
@@ -33,6 +37,6 @@ public class Hierarchy {
         acc.append( StringUtils.rightPad(".", level*2) );
         acc.append( node.toString() );
         acc.append( "\n" );
-        node.forEachSubordinate(s-> printTree(s,level+1,acc));
+        node.forEachSubordinate(s -> printTree(s, level + 1, acc));
     }
 }

@@ -118,7 +118,7 @@ public class Employee extends Person implements Serializable {
         });
     }
 
-    public Optional<Employee> getSubordinate(String login) {
-        return subordinates.stream().filter(s->s.getLogin().equals(login)).findFirst();
+    public Employee getSubordinate(String login) {
+        return subordinates.stream().filter(s->s.getLogin().equals(login)).findFirst().get();
     }
 }
