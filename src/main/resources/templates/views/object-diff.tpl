@@ -16,7 +16,7 @@ mainBody: contents {
     br()
     pre(){
         code('''Javers javers = JaversBuilder.javers().build()
-Diff diff = javers.compare(oldHier, currentHier)''')
+Diff diff = javers.compare(oldHier.getRoot(), currentHier.getRoot())''')
     }
 
     a(href:'/hierarchy-diff/Hier_2013/Hier_2014','diff "hierarchy 2013" -> "hierarchy 2014"')

@@ -36,14 +36,8 @@ public class HierarchyService {
         hierarchyRepository.save(hierarchy)
     }
 
-    //we want to treat 'Hierarchy_2013' and 'Hierarchy_2014' as both have the same GlobalId
-    //TODO add javers diff feature: join two nodes with different id
     Diff diff(Hierarchy oldHier, Hierarchy currentHier) {
-
-        oldHier.setHierarchyName(currentHier.getHierarchyName());
-
-        Diff diff = javers.compare(oldHier, currentHier)
-
+        Diff diff = javers.compare(oldHier.root, currentHier.root)
         diff
     }
 }
