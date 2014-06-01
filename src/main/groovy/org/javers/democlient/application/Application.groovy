@@ -11,21 +11,21 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 /**
  * @author bartosz walacik
  */
-@ComponentScan(basePackages = {"org.javers.democlient"})
+@ComponentScan(basePackages = ['org.javers.democlient'])
 @Configuration
 @EnableMongoRepositories
 //@Import(RepositoryRestMvcConfiguration.class)
 @EnableAutoConfiguration
-public class Application implements CommandLineRunner {
+class Application implements CommandLineRunner {
 
-    @Autowired private DataInitializer dataInitializer;
+    @Autowired private DataInitializer dataInitializer
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    static void main(String[] args) {
+        SpringApplication.run(Application.class, args)
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        dataInitializer.populate();
+    void run(String... args) throws Exception {
+        dataInitializer.populate()
     }
 }

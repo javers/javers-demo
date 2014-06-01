@@ -34,7 +34,7 @@ public class Employee extends Person implements Serializable {
     @Transient
     private Employee boss;
 
-    private Set<Employee> subordinates = new HashSet<>();
+    private List<Employee> subordinates = new ArrayList<>();
 
     public Position getPosition() {
         return position;

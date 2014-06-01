@@ -27,6 +27,10 @@ public class Hierarchy {
         return hierarchyName;
     }
 
+    void setHierarchyName(String hierarchyName) {
+        this.hierarchyName = hierarchyName;
+    }
+
     public String print(){
         StringBuilder b = new StringBuilder();
         printTree(root, 1, b);
