@@ -37,10 +37,17 @@ public class Hierarchy {
         return b.toString();
     }
 
+    /**
+     * @throws java.util.NoSuchElementException
+     */
+    public Employee getEmployee(String login) {
+        return root.getSubordinate(login);
+    }
+
     private void printTree(Employee node, int level, final StringBuilder acc){
         acc.append( StringUtils.rightPad(".", level*2) );
         acc.append( node.toString() );
         acc.append( "\n" );
-        node.forEachSubordinate(s -> printTree(s, level + 1, acc));
+        node.forEachDirectSubordinate(s -> printTree(s, level + 1, acc));
     }
 }

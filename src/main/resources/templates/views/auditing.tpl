@@ -4,4 +4,6 @@ mainBody: contents {
     h3("Data auditing feature")
 
 
+    a(href:'/hierarchy-edit','edit hierarchy')
+    br()
 }

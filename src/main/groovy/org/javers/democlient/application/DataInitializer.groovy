@@ -21,8 +21,8 @@ class DataInitializer {
         hierarchyRepository.save(new Hierarchy(createBobTree(),"Hier_2013"))
 
         def bobNew = createBobTree()
-        def lucyNew = bobNew.getSubordinate('kaz').getSubordinate('lucy')
-        def evaNew = bobNew.getSubordinate('kaz').getSubordinate('eva')
+        def lucyNew = bobNew.getSubordinate('lucy')
+        def evaNew = bobNew.getSubordinate('eva')
         lucyNew.addSubordinate(evaNew.getSubordinate('merry'))              //merry has new boss
         lucyNew.assignPosition(TEAM_LEAD,13500)                             //lucy got a rise
         lucyNew.getSubordinate('frodo').assignPosition(SCRUM_MASTER,9_000)  //frodo got a new position

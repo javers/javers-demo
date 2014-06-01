@@ -4,6 +4,8 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -20,6 +22,8 @@ import java.util.stream.Collectors;
  */
 @Document
 public class Employee extends Person implements Serializable {
+    private static final Logger logger = LoggerFactory.getLogger(Employee.class);
+
     @Id
     private String login;
     private Position position;
@@ -82,11 +86,32 @@ public class Employee extends Person implements Serializable {
         subordinate.boss = this;
 
         subordinates.add(subordinate);
+
+        logger.info("subordinate [{}] has a new boss [{}]", subordinate.getLogin(), this.getLogin());
+
         return this;
     }
 
-    public void forEachSubordinate(Consumer<Employee> action){
+    public void forEachDirectSubordinate(Consumer<Employee> action){
         subordinates.forEach(action);
+    }
+
+    /**
+     * @throws java.util.NoSuchElementException
+     */
+    public Employee getSubordinate(String login) {
+        return getAllEmployees().stream().filter(s->s.getLogin().equals(login)).findFirst().get();
+    }
+
+    List<Employee> getAllEmployees(){
+        List<Employee> all = new ArrayList<>();
+        this.acceptVisitor(e-> all.add(e));
+        return all;
+    }
+
+    void acceptVisitor(Consumer<Employee> action){
+        action.accept(this);
+        subordinates.forEach(s->s.acceptVisitor(action));
     }
 
     @Override
@@ -116,9 +141,5 @@ public class Employee extends Person implements Serializable {
             s.boss = this;
             s.rebuildBiDirectionalRelation();
         });
-    }
-
-    public Employee getSubordinate(String login) {
-        return subordinates.stream().filter(s->s.getLogin().equals(login)).findFirst().get();
     }
 }
