@@ -7,7 +7,6 @@ mainBody: contents {
     br()
     a(href:'/hierarchy/Hier_2014','hierarchy 2014')
 
-
     br()
     br()
     br()

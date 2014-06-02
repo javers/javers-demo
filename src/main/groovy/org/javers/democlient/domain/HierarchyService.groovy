@@ -40,4 +40,14 @@ public class HierarchyService {
         Diff diff = javers.compare(oldHier.root, currentHier.root)
         diff
     }
+
+    def updatePosition(String hierarchyName, String empLogin, Position newPosition, Integer newSalary) {
+        Hierarchy hierarchy = hierarchyRepository.getByName(hierarchyName)
+
+        def employee = hierarchy.getEmployee(empLogin)
+
+        employee.assignPosition(newPosition, newSalary)
+
+        hierarchyRepository.save(hierarchy)
+    }
 }

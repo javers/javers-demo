@@ -2,6 +2,7 @@ package org.javers.democlient.controller
 
 import org.javers.democlient.application.repository.HierarchyRepository
 import org.javers.democlient.domain.HierarchyService
+import org.javers.democlient.domain.Position
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
@@ -46,6 +47,15 @@ class HierarchyController {
     def changeBoss(@RequestParam String subordinateLogin,
                    @RequestParam String newBossLogin){
         hierarchyService.changeBoss(DEF_HIER, subordinateLogin, newBossLogin)
+
+        showAndEdit()
+    }
+
+    @RequestMapping(value="/hierarchy-edit/update-position", method = RequestMethod.POST)
+    def updatePosition(@RequestParam String empLogin,
+                       @RequestParam String newPosition,
+                       @RequestParam Integer newSalary){
+        hierarchyService.updatePosition(DEF_HIER, empLogin, Position.valueOf(newPosition), newSalary)
 
         showAndEdit()
     }
