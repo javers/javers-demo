@@ -2,6 +2,7 @@ package org.javers.democlient.application
 
 import org.javers.democlient.domain.Employee
 import org.javers.democlient.domain.Hierarchy
+import org.javers.democlient.domain.HierarchyService
 import org.javers.democlient.domain.Sex
 import org.javers.democlient.application.repository.HierarchyRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,9 @@ import static org.javers.democlient.domain.Position.*
 @Service
 class DataInitializer {
     @Autowired
+    private HierarchyService hierarchyService
+
+    @Autowired
     private HierarchyRepository hierarchyRepository
 
     void populate(){
@@ -26,7 +30,7 @@ class DataInitializer {
         lucyNew.addSubordinate(evaNew.getSubordinate('merry'))              //merry has new boss
         lucyNew.assignPosition(TEAM_LEAD,13500)                             //lucy got a rise
         lucyNew.getSubordinate('frodo').assignPosition(SCRUM_MASTER,9_000)  //frodo got a new position
-        hierarchyRepository.save(new Hierarchy(bobNew,"Hier_2014"))
+        hierarchyService.save(new Hierarchy(bobNew,"Hier_2014"))
     }
 
     Employee createBobTree(){
