@@ -8,12 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -29,17 +28,16 @@ public class Employee extends Person implements Serializable {
     private Position position;
     private Integer salary;
 
-    public Employee(String login, String firstName, String lastName, Sex sex) {
-       super(firstName, lastName, sex);
-        Preconditions.checkArgument(StringUtils.isNoneBlank(login));
-       this.login = login;
-    }
-
     @Transient
     private Employee boss;
 
     private List<Employee> subordinates = new ArrayList<>();
 
+    public Employee(String login, String firstName, String lastName, Sex sex) {
+       super(firstName, lastName, sex);
+        Preconditions.checkArgument(StringUtils.isNoneBlank(login));
+       this.login = login;
+    }
     public Position getPosition() {
         return position;
     }
