@@ -38,6 +38,7 @@ public class Employee extends Person implements Serializable {
         Preconditions.checkArgument(StringUtils.isNoneBlank(login));
        this.login = login;
     }
+
     public Position getPosition() {
         return position;
     }
@@ -85,7 +86,7 @@ public class Employee extends Person implements Serializable {
 
         subordinates.add(subordinate);
 
-        logger.info("subordinate [{}] has a new boss [{}]", subordinate.getLogin(), this.getLogin());
+        //logger.info("subordinate [{}] has a new boss [{}]", subordinate.getLogin(), this.getLogin());
 
         return this;
     }

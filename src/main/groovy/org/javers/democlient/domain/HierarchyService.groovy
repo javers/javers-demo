@@ -1,9 +1,9 @@
 package org.javers.democlient.domain
 
 import com.mongodb.Mongo
-import com.sun.org.apache.bcel.internal.generic.NEW
 import org.javers.core.Javers
 import org.javers.core.JaversBuilder
+import org.javers.core.commit.Commit
 import org.javers.core.diff.Diff
 import org.javers.democlient.application.repository.HierarchyRepository
 import org.javers.repository.mongo.MongoRepository
@@ -28,8 +28,15 @@ public class HierarchyService {
         this.mongo = mongo
         this.hierarchyRepository = hierarchyRepository
 
+        //javers = JaversBuilder.javers().build()
         def mongoRepo =  new MongoRepository(mongo.getDB("test"))
         javers = JaversBuilder.javers().registerJaversRepository(mongoRepo).build()
+    }
+
+    void save(Hierarchy hierarchy){
+        Commit commit = javers.commit("demo-app",hierarchy.getRoot())
+        logger.info("diff: \n{}", javers.toJson(commit.diff))
+        hierarchyRepository.save(hierarchy)
     }
 
     String diffAsJson(Hierarchy oldHier, Hierarchy currentHier){
@@ -37,7 +44,7 @@ public class HierarchyService {
         javers.toJson(diff)
     }
 
-    def changeBoss(String hierarchyName, String subordinateLogin, String newBossLogin){
+    void changeBoss(String hierarchyName, String subordinateLogin, String newBossLogin){
         Hierarchy hierarchy = hierarchyRepository.getByName(hierarchyName)
 
         def subordinate = hierarchy.getEmployee(subordinateLogin)
@@ -45,8 +52,7 @@ public class HierarchyService {
 
         newBoss.addSubordinate(subordinate)
 
-        javers.commit("demo-app",hierarchy.getRoot())
-        hierarchyRepository.save(hierarchy)
+        save(hierarchy)
     }
 
     Diff diff(Hierarchy oldHier, Hierarchy currentHier) {
@@ -54,14 +60,13 @@ public class HierarchyService {
         diff
     }
 
-    def updatePosition(String hierarchyName, String empLogin, Position newPosition, Integer newSalary) {
+    void updatePosition(String hierarchyName, String empLogin, Position newPosition, Integer newSalary) {
         Hierarchy hierarchy = hierarchyRepository.getByName(hierarchyName)
 
         def employee = hierarchy.getEmployee(empLogin)
 
         employee.assignPosition(newPosition, newSalary)
 
-        javers.commit("demo-app",hierarchy.getRoot())
-        hierarchyRepository.save(hierarchy)
+        save(hierarchy)
     }
 }
