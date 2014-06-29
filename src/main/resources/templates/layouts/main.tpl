@@ -29,11 +29,20 @@ body {
                             }
                             ul (class: 'dropdown-menu') {
                                 li{
-                                    a(href:'/object-diff', "Object diff")
+                                    a(href:'/object-diff', "&bullet; Object diff")
                                 }
                                 li (class: 'divider', role: 'presentation')
                                 li{
-                                    a(href:'/auditing', "Data auditing")
+                                   a(href:"#"){
+                                        b("Data auditing")
+                                   }
+                                }
+                                li{
+
+                                    a(href:'/hierarchy-edit','&bullet; edit hierarchy')
+                                }
+                                li{
+                                    a(href:'/emp-history','&bullet; show employee history')
                                 }
                             }
                     }

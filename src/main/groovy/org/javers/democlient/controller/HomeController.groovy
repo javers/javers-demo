@@ -19,10 +19,5 @@ class HomeController {
     String diff(){
         "views/object-diff"
     }
-
-    @RequestMapping("/auditing")
-    String auditing(){
-        "views/auditing"
-    }
 }
 
