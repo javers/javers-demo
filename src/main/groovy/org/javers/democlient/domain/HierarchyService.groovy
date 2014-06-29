@@ -1,12 +1,9 @@
 package org.javers.democlient.domain
 
-import com.mongodb.Mongo
 import org.javers.core.Javers
-import org.javers.core.JaversBuilder
 import org.javers.core.commit.Commit
 import org.javers.core.diff.Diff
 import org.javers.democlient.application.repository.HierarchyRepository
-import org.javers.repository.mongo.MongoRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,19 +15,13 @@ import org.springframework.stereotype.Service
 public class HierarchyService {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(HierarchyService)
 
-    private final Javers javers
-
-    private final Mongo mongo;
+    private final Javers javers  // = JaversBuilder.javers().build()
     private final HierarchyRepository hierarchyRepository
 
     @Autowired
-    HierarchyService(Mongo mongo, HierarchyRepository hierarchyRepository) {
-        this.mongo = mongo
+    HierarchyService(Javers javers, HierarchyRepository hierarchyRepository) {
+        this.javers = javers
         this.hierarchyRepository = hierarchyRepository
-
-        //javers = JaversBuilder.javers().build()
-        def mongoRepo =  new MongoRepository(mongo.getDB("test"))
-        javers = JaversBuilder.javers().registerJaversRepository(mongoRepo).build()
     }
 
     void save(Hierarchy hierarchy){
@@ -42,6 +33,11 @@ public class HierarchyService {
     String diffAsJson(Hierarchy oldHier, Hierarchy currentHier){
         def diff = diff(oldHier,currentHier)
         javers.toJson(diff)
+    }
+
+    String historySnapshotsAsJson(String employeeLogin){
+        def snapshots = javers.getStateHistory(employeeLogin, Employee, 10)
+        javers.jsonConverter.toJson(snapshots)
     }
 
     void changeBoss(String hierarchyName, String subordinateLogin, String newBossLogin){
