@@ -5,9 +5,9 @@ mainBody: contents {
     div(class:"row"){
        div(class:"col-md-8"){
         div (class: "panel panel-default"){
-          div (class:"panel-heading", "History of employee $login")
+          div (class:"panel-heading", "Change history (diffs) of employee $login")
           div (class:"panel-body"){
-            form(method:'POST', class:"form-horizontal", action:'/emp-history'){
+            form(method:'POST', class:"form-horizontal", action:'/emp-change-history'){
                 div (class:"form-group"){
                   label( class:"control-label col-xs-3", for:"login", "employee")
                   div (class:"col-xs-4"){
@@ -25,7 +25,8 @@ mainBody: contents {
             }
 
                 pre(){
-                    code(snapshots)
+                    //div("Changes: $changesCount")
+                    code(changes)
                 }
           }
         }

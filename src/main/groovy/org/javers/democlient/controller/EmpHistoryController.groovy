@@ -21,11 +21,19 @@ class EmpHistoryController {
     }
 
 
-    @RequestMapping(value="/emp-history")
-    def show(@RequestParam(defaultValue = "kaz") String login){
+    @RequestMapping(value="/emp-state-history")
+    def showStateHistory(@RequestParam(defaultValue = "kaz") String login){
 
         def snapshotsJson = hierarchyService.historySnapshotsAsJson(login)
 
-        new ModelAndView("views/emp-history",[snapshots: snapshotsJson, login:login])
+        new ModelAndView("views/emp-state-history",[snapshots: snapshotsJson, login:login])
+    }
+
+    @RequestMapping(value="/emp-change-history")
+    def showDiffHistory(@RequestParam(defaultValue = "kaz") String login){
+
+        def changesJson = hierarchyService.historyChangesAsJson(login)
+
+        new ModelAndView("views/emp-change-history",[changes: changesJson, login:login])
     }
 }

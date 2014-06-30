@@ -42,7 +42,10 @@ body {
                                     a(href:'/hierarchy-edit','&bullet; edit hierarchy')
                                 }
                                 li{
-                                    a(href:'/emp-history','&bullet; show employee history')
+                                    a(href:'/emp-state-history','&bullet; show employee <b>state</b> history')
+                                }
+                                li{
+                                    a(href:'/emp-change-history','&bullet; show employee <b>change</b> history')
                                 }
                             }
                     }

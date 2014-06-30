@@ -40,6 +40,12 @@ public class HierarchyService {
         javers.jsonConverter.toJson(snapshots)
     }
 
+    String historyChangesAsJson(String employeeLogin){
+        def changes = javers.getChangeHistory(employeeLogin, Employee, 10)
+        logger.info("found ${changes.size()} change(s) for $employeeLogin")
+        javers.jsonConverter.toJson(changes)
+    }
+
     void changeBoss(String hierarchyName, String subordinateLogin, String newBossLogin){
         Hierarchy hierarchy = hierarchyRepository.getByName(hierarchyName)
 
