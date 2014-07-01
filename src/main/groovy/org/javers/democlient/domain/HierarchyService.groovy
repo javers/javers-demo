@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service
 public class HierarchyService {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(HierarchyService)
 
-    private final Javers javers  // = JaversBuilder.javers().build()
+    private final Javers javers
     private final HierarchyRepository hierarchyRepository
 
     @Autowired
