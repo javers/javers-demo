@@ -14,6 +14,11 @@ public class Person {
     private Sex sex;
     private Address address;
 
+    public Person(String lastName) {
+        Preconditions.checkArgument(StringUtils.isNoneBlank(lastName));
+        this.lastName = lastName;
+    }
+
     public Person(String firstName, String lastName, Sex sex) {
         Preconditions.checkArgument(StringUtils.isNoneBlank(lastName));
         this.firstName = firstName;
