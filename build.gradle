@@ -29,6 +29,7 @@ jar {
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven { url 'http://oss.sonatype.org/content/repositories/snapshots' }
     maven { url 'http://repo.spring.io/milestone' }
 }
@@ -36,8 +37,8 @@ repositories {
 dependencies {
 
     //javers dependencies
-    compile 'org.javers:javers-core:0.7.0-SNAPSHOT'
-    compile 'org.javers:javers-persistence-mongo:0.7.0-SNAPSHOT'
+    compile 'org.javers:javers-core:0.8.0'
+    compile 'org.javers:javers-persistence-mongo:0.8.0'
 
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
     compile 'org.springframework.boot:spring-boot-starter-web'
