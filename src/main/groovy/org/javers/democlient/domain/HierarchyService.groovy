@@ -3,6 +3,8 @@ package org.javers.democlient.domain
 import org.javers.core.Javers
 import org.javers.core.commit.Commit
 import org.javers.core.diff.Diff
+import org.javers.core.metamodel.object.GlobalIdDTO
+import org.javers.core.metamodel.object.InstanceIdDTO
 import org.javers.democlient.application.repository.HierarchyRepository
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -36,12 +38,12 @@ public class HierarchyService {
     }
 
     String historySnapshotsAsJson(String employeeLogin){
-        def snapshots = javers.getStateHistory(employeeLogin, Employee, 10)
+        def snapshots = javers.getStateHistory(InstanceIdDTO.instanceId(employeeLogin, Employee), 10)
         javers.jsonConverter.toJson(snapshots)
     }
 
     String historyChangesAsJson(String employeeLogin){
-        def changes = javers.getChangeHistory(employeeLogin, Employee, 10)
+        def changes = javers.getChangeHistory(InstanceIdDTO.instanceId(employeeLogin, Employee), 10)
         logger.info("found ${changes.size()} change(s) for $employeeLogin")
         javers.jsonConverter.toJson(changes)
     }

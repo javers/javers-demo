@@ -24,7 +24,7 @@ targetCompatibility = 1.8
 
 jar {
     baseName = 'javers-demo'
-    version =  '0.7.0'
+    version =  '1.0.0'
 }
 
 repositories {
@@ -38,8 +38,8 @@ repositories {
 dependencies {
 
     //javers dependencies
-    compile 'org.javers:javers-core:0.8.0'
-    compile 'org.javers:javers-persistence-mongo:0.8.0'
+    compile 'org.javers:javers-core:1.0.0'
+    compile 'org.javers:javers-persistence-mongo:1.0.0'
 
     compile 'org.springframework.boot:spring-boot-starter-data-mongodb'
     compile 'org.springframework.boot:spring-boot-starter-web'
