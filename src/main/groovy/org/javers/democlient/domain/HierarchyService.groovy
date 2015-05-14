@@ -3,9 +3,8 @@ package org.javers.democlient.domain
 import org.javers.core.Javers
 import org.javers.core.commit.Commit
 import org.javers.core.diff.Diff
-import org.javers.core.metamodel.object.GlobalIdDTO
-import org.javers.core.metamodel.object.InstanceIdDTO
 import org.javers.democlient.application.repository.HierarchyRepository
+import org.javers.repository.jql.QueryBuilder
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -38,12 +37,12 @@ public class HierarchyService {
     }
 
     String historySnapshotsAsJson(String employeeLogin){
-        def snapshots = javers.getStateHistory(InstanceIdDTO.instanceId(employeeLogin, Employee), 10)
+        def snapshots = javers.findSnapshots(QueryBuilder.byInstanceId(employeeLogin, Employee).limit(10).build())
         javers.jsonConverter.toJson(snapshots)
     }
 
     String historyChangesAsJson(String employeeLogin){
-        def changes = javers.getChangeHistory(InstanceIdDTO.instanceId(employeeLogin, Employee), 10)
+        def changes = javers.findChanges(QueryBuilder.byInstanceId(employeeLogin, Employee).limit(10).build())
         logger.info("found ${changes.size()} change(s) for $employeeLogin")
         javers.jsonConverter.toJson(changes)
     }
